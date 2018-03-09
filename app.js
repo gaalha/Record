@@ -1,11 +1,11 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var i18n = require('i18n');
-var expressValidator = require('express-validator');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const i18n = require('i18n');
+const expressValidator = require('express-validator');
 
 //Set locale
 i18n.configure({
@@ -14,15 +14,17 @@ i18n.configure({
     updateFiles: false
 });
 
+
+
 //var index = require('./routes/index');
 //var users = require('./routes/users');
 
 //Routes
-var routes = require('./app/routes');
+const routes = require('./app/routes');
 //express-validator
-var expressValidator = require('express-validator');
+//var expressValidator = require('express-validator');
 
-var app = express();
+const app = express();
 app.use(i18n.init);
 
 // view engine setup
@@ -44,7 +46,7 @@ routes(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
