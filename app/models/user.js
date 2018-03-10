@@ -9,9 +9,9 @@ let UserSchema = new Schema({
 });
 
 // MODIFICAR CONTRASENA
-UserSchema.pre('save', (next) => {
+/* UserSchema.pre('save', (next) => {
     let user = this;
-    // if (!user.isModified('password')) return next();
+    if (!user.isModified('password')) return next();
 
     bcrypt.genSalt(saltRounds, (err, salt) => {
         if (err) return next(err);
@@ -21,7 +21,7 @@ UserSchema.pre('save', (next) => {
             next();
         });
     });
-});
+}); */
 
 // COMPARAR CONTRASENAS
 UserSchema.methods.comparePassword = (candidatePassword, cb) => {

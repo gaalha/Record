@@ -56,7 +56,6 @@ router.post('/save', (req, res, next) => {
         }else{
             user.save((err) => {
                 if(err) {
-                    console.log(err);
                     res.send({
                         success: false,
                         message: 'Error al guardar el usuario',
