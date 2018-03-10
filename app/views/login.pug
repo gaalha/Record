@@ -1,0 +1,29 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible' content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no')
+        
+        meta(name='theme-color', content='#EF5350')
+        meta(name='apple-mobile-web-app-status-bar-style', content='#EF5350')
+        meta(name='msapplication-navbutton-color', content='#EF5350')
+
+        title #{__('title.login.tab')}
+
+    body
+        div(style='text-align: center')
+            form#loginForm
+                    div.form-group.col-sm-12
+                        h4.control-label(for='txtUserEmail') Correo:
+                        input.form-control.input-lg(type='email', id='txtUserEmail', name='txtUserEmail')
+
+                    div.form-group.col-sm-12
+                        h4.control-label(for='txtPassword') Contrasena:
+                        input.form-control.input-lg(type='password', id='txtPassword', name='txtPassword')
+
+                    div.form-group.col-sm-12
+                        button.btn.btn-primary.btn-lg.btn-block(type='submit') Iniciar Sesion
+                        a.text-center(href='/reset')
+                            br
+                            h4 Reestablecer contrasena
