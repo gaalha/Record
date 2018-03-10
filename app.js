@@ -6,6 +6,14 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const i18n = require('i18n');
 const expressValidator = require('express-validator');
+const mongoose = require('mongoose');
+
+// DATABASE CONNECTION
+const mongoDB = 'mongodb://localhost/record';
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 //Set locale
 i18n.configure({
@@ -14,18 +22,15 @@ i18n.configure({
     updateFiles: false
 });
 
-
-
-//var index = require('./routes/index');
-//var users = require('./routes/users');
-
 //Routes
 const routes = require('./app/routes');
-//express-validator
-//var expressValidator = require('express-validator');
 
 const app = express();
+
 app.use(i18n.init);
+
+// EXPRESS-VALIDATOR
+app.use(expressValidator());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app/views'));
