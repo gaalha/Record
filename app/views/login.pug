@@ -15,15 +15,12 @@ html
         div(style='text-align: center')
             form#loginForm
                     div.form-group.col-sm-12
-                        h4.control-label(for='txtUserEmail') Correo:
+                        h4.control-label(for='txtUserEmail') #{__('login.label.email')}:
                         input.form-control.input-lg(type='email', id='txtUserEmail', name='txtUserEmail')
 
                     div.form-group.col-sm-12
-                        h4.control-label(for='txtPassword') Contrasena:
+                        h4.control-label(for='txtPassword') #{__('login.label.email')}:
                         input.form-control.input-lg(type='password', id='txtPassword', name='txtPassword')
 
                     div.form-group.col-sm-12
                         button.btn.btn-primary.btn-lg.btn-block(type='submit') Iniciar Sesion
-                        a.text-center(href='/reset')
-                            br
-                            h4 Reestablecer contrasena
