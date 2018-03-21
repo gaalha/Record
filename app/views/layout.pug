@@ -1,7 +1,102 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible' content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no')
+
+        //Chrome, Firefox OS and Opera
+        meta(name='theme-color', content='#EF5350')
+        //iOS Safari
+        meta(name='apple-mobile-web-app-status-bar-style', content='#EF5350')
+        //Windows Phone
+        meta(name='msapplication-navbutton-color', content='#EF5350')
+
+        link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/stylesheets/AdminLTE.css')
+        link(rel='stylesheet', href='/stylesheets/skin-red.css')
+        link(rel='stylesheet', href='/stylesheets/layout.css')
+        link(rel='stylesheet', href='/lib/components-font-awesome/css/font-awesome.min.css')
+        link(rel='stylesheet', href='/lib/humane-js/themes/libnotify.css')
+        link(rel='stylesheet', href='/stylesheets/layout.css')
+
+        block stylesheets
+        block title
+
+    body.hold-transition.skin-red.sidebar-mini
+        div.wrapper
+            
+            header.main-header
+                a.logo(href='/')
+                    span.logo-mini
+                        b T
+                    span.logo-lg
+                        b #{__('label.tarjetero')}
+                nav.navbar.navbar-static-top
+                    a.sidebar-toggle(data-toggle='push-menu', role='button', href='#')
+                        span.sr-only Toggle navigation
+
+                    div.navbar-custom-menu
+                        ul.nav.navbar-nav
+                            li.dropdown.user.user-menu
+                                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                                    img.user-image(src='/img/avatar.png')
+                                    //span.hidden-xs= user.name + " " + user.lastName
+                                ul.dropdown-menu
+                                    li.user-header
+                                        img.img-circle(src='/img/avatar.png' alt='User Image')
+                                        //p= user.name + " " + user.lastName
+                                            small= user.userEmail
+                                    li.user-footer
+                                        div.pull-left
+                                            a.btn.btn-default.btn-flat(href='/account') #{__('label.account')}
+                                        div.pull-right
+                                            a.btn.btn-default.btn-flat(href='/logout') #{__('label.sign.out')}
+
+            aside.main-sidebar
+                section.sidebar
+                    
+                    ul.sidebar-menu(data-widget='tree')
+                        li.header #{__('label.navigation')}
+                        li#dashboard
+                            a(href='/')
+                                i.fa.fa-dashboard
+                                span  #{__('label.dashboard')}
+                        li#clients
+                            a(href='/clients/')
+                                i.fa.fa-building-o
+                                span  #{__('label.clients')}
+                        li#users
+                            a(href='/users/')
+                                i.fa.fa-user-o
+                                span  #{__('label.layout.users')}
+            div.content-wrapper
+                section.content
+                    div.row
+                        div.col-xs-12
+                            block content
+                        
+            footer.main-footer
+                div.pull-right.hidden-xs
+                    b #{__('layout.label.version')} &nbsp;
+                    span= version
+                strong
+                    | #{__('layout.footer')}
+                span
+                    | #{__('layout.footer.rights')}
+
+        script(src='/api/constants/constants')
+        script(src='/lib/jquery/dist/jquery.min.js')
+        script(src='/lib/bootstrap/dist/js/bootstrap.min.js')
+        script(src='/javascripts/adminlte.js')
+        script(src='/lib/humane-js/humane.min.js')
+        script(src='/lib/bootbox.js/bootbox.js')
+        script(src='/javascripts/base64.js')
+        script(src='/plugins/select2-3/js/select2.min.js')
+        script(src='/plugins/select2-3/js/select2_locale_es.js')
+        script(src='/plugins/select2-3/js/utils.js')
+        script(src='/lib/jquery-validation/dist/jquery.validate.min.js')
+        script(src='/lib/jquery-validation/dist/additional-methods.min.js')
+        script(src='/javascripts/validatorDefaults.js')
+        script(src='/lib/qrious/dist/qrious.js')
+        block scripts

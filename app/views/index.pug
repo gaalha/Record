@@ -1,5 +1,56 @@
 extends layout
 
+block title
+    title #{__('title.dashboard')}
+
 block content
-  h1= title
-  p Welcome to #{title}
+    div.row
+        div.col-lg-3.col-xs-6
+            div.small-box.bg-red-active
+                div.inner
+                    h3= clients
+                    p #{__('label.clients')}
+                div.icon
+                    i.fa.fa-building
+        div.col-lg-3.col-xs-6
+            div.small-box.bg-yellow-active
+                div.inner
+                    h3= contacts
+                    p #{__('label.contacts')}
+                div.icon
+                    i.fa.fa-address-book-o
+        div.col-lg-3.col-xs-6
+            div.small-box.bg-maroon
+                div.inner
+                    h3= urlsCount
+                    p #{__('label.urls')}
+                div.icon
+                    i.fa.fa-globe
+        div.col-lg-3.col-xs-6
+            div.small-box.bg-aqua-active
+                div.inner
+                    h3= users
+                    p #{__('label.users')}
+                div.icon
+                    i.fa.fa-users
+        div.col-lg-3.col-xs-6
+            div.small-box.bg-green-active
+                div.inner
+                    h3= views
+                    p #{__('contact.views')}
+                div.icon
+                    i.fa.fa-eye
+        div.col-lg-3.col-xs-6
+            div.small-box.bg-light-blue-active
+                div.inner
+                    h3= downloads
+                    p #{__('contact.downloads')}
+                div.icon
+                    i.fa.fa-arrow-circle-down
+        div.col-lg-3.col-xs-6
+            div.small-box.bg-green-active
+                div.inner
+                    h3= urlViews
+                    p #{__('label.urls.visited')}
+                div.icon
+                    i.fa.fa-line-charts

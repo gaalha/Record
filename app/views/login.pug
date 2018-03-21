@@ -4,23 +4,47 @@ html
         meta(charset='utf-8')
         meta(http-equiv='X-UA-Compatible' content='IE=edge')
         meta(name='viewport', content='width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no')
-        
+
         meta(name='theme-color', content='#EF5350')
         meta(name='apple-mobile-web-app-status-bar-style', content='#EF5350')
         meta(name='msapplication-navbutton-color', content='#EF5350')
 
         title #{__('title.login.tab')}
 
+        link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/lib/components-font-awesome/css/font-awesome.min.css')
+        link(rel='stylesheet', href='/lib/humane-js/themes/libnotify.css')
+
     body
-        div(style='text-align: center')
-            form#loginForm
+        div(style='height: 50px')
+        div.panel.panel-default.col-sm-4.col-sm-offset-4(style='padding-top: 10px')
+
+                di.panel-body
+                form#loginForm
+                    div.text-center
+                        i.fa.fa-user-circle-o.fa-5x(aria-hidden='true')
+                        h3 #{__('label.login.title')}
+                        br
                     div.form-group.col-sm-12
-                        h4.control-label(for='txtUserEmail') #{__('login.label.email')}:
+                        h4.control-label(for='txtUserEmail') #{__('label.login.email')}:
                         input.form-control.input-lg(type='email', id='txtUserEmail', name='txtUserEmail')
 
                     div.form-group.col-sm-12
-                        h4.control-label(for='txtPassword') #{__('login.label.email')}:
+                        h4.control-label(for='txtPassword') #{__('label.login.password')}:
                         input.form-control.input-lg(type='password', id='txtPassword', name='txtPassword')
 
                     div.form-group.col-sm-12
-                        button.btn.btn-primary.btn-lg.btn-block(type='submit') Iniciar Sesion
+                        button.btn.btn-primary.btn-lg.btn-block(type='submit') #{__('button.login.signin')}
+                        a.text-center(href='/reset')
+                            br
+                            h4 #{__('label.login.reset.password')}
+
+        script(src='/api/constants/constants')
+        script(src='/lib/jquery/dist/jquery.min.js')
+        script(src='/lib/bootstrap/dist/js/bootstrap.min.js')
+        script(src='/lib/jquery-validation/dist/jquery.validate.min.js')
+        script(src='/lib/humane-js/humane.min.js')
+        script(src='/lib/bootbox.js/bootbox.js')
+        script(src='/javascripts/base64.js')
+        script(src='/javascripts/frontend/loginAdmin.js')
+        script(src='/javascripts/validatorDefaults.js')
