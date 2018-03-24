@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const CONSTANTS = require('../utils/constants');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { version: CONSTANTS.version });
 });
 
 //LOGIN HOMEPAGE
@@ -11,8 +12,9 @@ router.get('/login', function(req, res, next){
     res.render('login');
 });
 
-router.get('/user', function(req, res, next){
-    res.render('login');
+//USERS
+router.get('/users', function(req, res, next){
+    res.render('userGrid', {version: CONSTANTS.version});
 });
 
 module.exports = router;

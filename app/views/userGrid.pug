@@ -1,0 +1,34 @@
+extends layout
+
+block stylesheets
+    link(rel='stylesheet', href='/lib/datatables/media/css/dataTables.bootstrap.css')
+
+block title
+    title #{__('title.users')}
+
+block content
+    div#button.col-md-10.col-md-offset-1.col-xs-12
+        button#btnNewUser.btn.btn-primary(type='button', data-action='new')
+            i.fa.fa-plus
+            | &nbsp; #{__('label.new')} 
+
+    div#content.col-md-10.col-md-offset-1.col-xs-12
+        br
+        div.table-responsive
+            table#userGrid.display(width='100%')
+                thead
+                    th #
+                    th #{__('label.user.name')}
+                    th #{__('label.user.userName')}
+                    th #{__('label.actions')}
+                tbody
+                
+        textarea#gridButtons(style='display:none;')
+            include templates/userGridButtonsTemplate
+        textarea#userFormBody(style='display:none;')
+            include forms/userForm
+
+block scripts
+    script(src='/lib/datatables/media/js/jquery.dataTables.js')
+    script(src='/lib/datatables/media/js/dataTables.bootstrap.js')
+    script(src='/javascripts/frontend/userAdmin.js')

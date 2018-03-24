@@ -1,19 +1,19 @@
-var gridButtons = "";
-var gridStatus = "";
-var table;
+let gridButtons = "";
+let gridStatus = "";
+let table;
 
-$(document).ready(function(){
+$(document).ready(() => {
     prepareButtons();
     initGrid();
 });
 
 function prepareButtons(){
     gridStatus = $("#gridStatus").val();
-    var bodyButtons = $("#gridButtons").val();
-    var tags = $("<div/>");
+    let bodyButtons = $("#gridButtons").val();
+    let tags = $("<div/>");
     tags.append(bodyButtons);
 
-    $("#btnNew").click(function(){
+    $("#btnNewUser").click(() => {
         showDialog() 
     });
 
@@ -35,8 +35,8 @@ function bindButtons(){
 function drawRowNumbers(selector,table){
     if(typeof(table)=='undefined') return;
 
-    var info = table.page.info();
-    var index = info.start + 1;
+    let info = table.page.info();
+    let index = info.start + 1;
     $.each($(selector+" tbody tr td:first-child"),function(idx,obj){
         if($(obj).hasClass('dataTables_empty')) return;
         $(obj).addClass('text-center').html(index++);
@@ -46,21 +46,20 @@ function drawRowNumbers(selector,table){
 function initGrid(){
     table = $('#userGrid')
         .on('draw.dt',function(e,settings,json,xhr){
-            setTimeout(function(){bindButtons();},500);
+            setTimeout(function() {bindButtons();},500);
             drawRowNumbers('#userGrid', table);
         }).DataTable({
         language: {
-            url: CONSTANTS.lang.dataTable.url
+            url: '../languages/dataTables.es.lang'
         },
-        ajax: CONSTANTS.routes.user.getList,
+        ajax: '/api/user/get',
         aoColumns: [
             {data: '_id', sortable: false, searchable:false},
             {data: 'name'},
-            {data: 'lastName'},
-            {data: 'userEmail'},
+            {data: 'userName'},
             {
                 sortable:false, searchable:false,
-                render:function(data,type,row,meta){
+                render: function(data,type,row,meta) {
                     return gridButtons.replace("{data}", Base64.encode(JSON.stringify(row)));
                 }
             }
@@ -69,85 +68,40 @@ function initGrid(){
     $('#userGrid').removeClass('display').addClass('table table-bordered table-hover dataTable');
 }
 
-function deleteRecord(_id){
-    bootbox.confirm({
-        message: CONSTANTS.lang.user.deleteQuestion, 
-        buttons: {
-            confirm: {
-                label: CONSTANTS.lang.label.ok,
-                className: 'btn-primary'
-            },
-            cancel: {
-                label: CONSTANTS.lang.label.cancel,
-                className: 'btn-secondary'
-            }
-        },
-        callback: function(result) {
-            if(result){
-                $.ajax({
-                    url: CONSTANTS.routes.user.delete.replace(':id', _id),
-                    type:'DELETE',
-                    success:function(data){
-                        humane.log(data.message)
-                        if(data.success){
-                            table.ajax.reload();
-                        }
-                    }
-                });
-            }
-        }
-    });
-}
-
 function showDialog(_id){
-    var isEditing = !(typeof(_id) === "undefined" || _id === 0);
+    let isEditing = !(typeof(_id) === "undefined" || _id === 0);
 
     dialog = bootbox.dialog({
-        title: (isEditing ? CONSTANTS.lang.label.edit : CONSTANTS.lang.label.new),
+        title: (isEditing ? 'MODIFICAR USUARIO' : 'AGREGAR USUARIO'),
         message: $("#userFormBody").val(),
         className:"modalSmall"
     });   
     startValidation();
 
-    if(isEditing){
+    /*if(isEditing){
         $("#txtIdHidden").val(_id);
         loadData(_id);
-        
-        $("#divPassword").hide();
-
-        $("#chkChangePassword").click(function () {
-            $("#divPassword").toggle();
-
-            if($("#chkChangePassword").is(':checked')){
-                $("#statusChangePassword").val("1");
-            }else{
-                $("#statusChangePassword").val("0");
-            }
-        });
-    }else{
-        $("#statusChangePassword").val("1");
-        $("#passSwitch").hide();
-    }
+    }*/
 }
 
+/*
 function loadData(_id){
     var form = $("#userForm");
-    var date = $('#txtDate');
     var name= $('#txtName');
-    var lastName= $('#txtLastName');
-    var userEmail= $('#txtUserEmail');
+    var userName= $('#txtUsername');
+    var password= $('#txtPassword');
     $.ajax({
         url: CONSTANTS.routes.user.getDetail.replace(':id', _id),
         type:'GET',
-        success:function(data){
+        success:(data) => {
             if(data.success == true){
-                date.val(data.data.createdAt);
                 name.val(data.data.name);
-                lastName.val(data.data.lastName);
-                userEmail.val(data.data.userEmail);
+                userName.val(data.data.userName);
+                password.val(data.data.password);
             }
         }});
 }
+*/
 
 function startValidation(){
     $('#userForm').validate({
@@ -160,7 +114,7 @@ function startValidation(){
                     return $.trim(value);
                 }
             },
-            txtLastName: {
+            txtUsername: {
                 required:true,
                 minlength: 2,
                 maxlength:40,
@@ -168,21 +122,8 @@ function startValidation(){
                     return $.trim(value);
                 }
             },
-            txtUserEmail: {
-                required:true,
-                normalizer: function(value) {
-                    return $.trim(value);
-                }
-            },
             txtPassword: {
                 required: true,
-                normalizer: function(value) {
-                    return $.trim(value);
-                }
-            },
-            txtPassword1: {
-                required: true,
-                equalTo:"#txtPassword",
                 normalizer: function(value) {
                     return $.trim(value);
                 }
@@ -190,24 +131,19 @@ function startValidation(){
         },
         messages: {
             txtName: {
-                required: CONSTANTS.lang.user.required,
-                minlength: CONSTANTS.lang.user.minlength,
-                maxlength: CONSTANTS.lang.user.maxlength
+                required: 'El campo nombre es requerido',
+                minlength: 'El minimo de caracteres es de 2',
+                maxlength: 'El maximo de caracteres es de 40'
             },
-            txtLastName: {
-                required: CONSTANTS.lang.user.required,
-                minlength: CONSTANTS.lang.user.minlength,
-                maxlength:CONSTANTS.lang.user.maxlength
+            txtUsername: {
+                required: 'El campo usuario es requerido',
+                minlength: 'El minimo de caracteres es de 2',
+                maxlength: 'El maximo de caracteres es de 40'
             },
-            txtUserEmail: {required: CONSTANTS.lang.user.required},
             txtPassword: {
-                required: CONSTANTS.lang.user.required,
-                minlength: CONSTANTS.lang.user.password.minlength
-            },
-            txtPassword1: {
-                required: CONSTANTS.lang.user.required,
-                minlength: CONSTANTS.lang.user.password.minlength,
-                equalTo: CONSTANTS.lang.user.password.equalTo
+                required: 'El campo contraseña es requerido',
+                minlength: 'El minimo de caracteres es de 8',
+                maxlength: 'El maximo de caracteres es de 20'
             }
         },
         submitHandler: function(form) {
@@ -216,19 +152,50 @@ function startValidation(){
     });
 }
 
+
 function save(){
-    var form = $("#userForm");
-    var data = form.serialize();
+    let form = $("#userForm");
+    let data = form.serialize();
     $.ajax({
-       url: CONSTANTS.routes.user.save,
-       type: 'POST',
-       data:  data,
-       success:function(data){
-           humane.log(data.message);
-           if(data.success==true){
-               table.ajax.reload();
-               dialog.modal('hide');
-           }
-       }
+        url: '/api/user/save',
+        type: 'POST',
+        data: data,
+        success: function(data) {
+            humane.log(data.message);
+            if(data.success==true){
+                table.ajax.reload();
+                dialog.modal('hide');
+            }
+        }
+    });
+}
+
+function deleteRecord(_id){
+    bootbox.confirm({
+        message: '¿Seguro que desea eliminar?', 
+        buttons: {
+            confirm: {
+                label: 'Sí',
+                className: 'btn-primary'
+            },
+            cancel: {
+                label: 'Cancelar',
+                className: 'btn-secondary'
+            }
+        },
+        callback: function(result) {
+            if(result){
+                $.ajax({
+                    url: '/api/user/delete/' + _id,
+                    type:'DELETE',
+                    success: function(data) {
+                        humane.log(data.message);
+                        if(data.success){
+                            table.ajax.reload();
+                        }
+                    }
+                });
+            }
+        }
     });
 }

@@ -1,0 +1,21 @@
+form(method='POST', action='', id='userForm', style='margin-left:15px; margin-right:15px;')
+    div.form-group
+        input#txtIdHidden.form-control(type='hidden', name='txtIdHidden')
+    div.row.col-md-offset-1
+        div.col-md-10.form-group
+            label(for='txtName') #{__('label.user.name')}:
+            input#txtName.form-control.error(type='text', name='txtName', value='', required)
+    div.row.col-md-offset-1
+        div.col-md-10.form-group
+            label(for='txtUsername') #{__('label.user.lastName')}:
+            input#txtUsername.form-control.error(type='text', name='txtUsername', value='', required)
+    div.row.col-md-offset-1#txtPassword
+        div.col-md-10.form-group
+            label(for='txtPassword') #{__('label.user.password')}:
+            input#txtPassword.form-control.error(type='password', name='txtPassword', value='', minlength='8', maxlength='16', required)
+    div.row.col-md-offset-1
+        div.col-md-12
+            br
+            button.btn.btn-primary.pull-right(type='submit') 
+                i.fa.fa-save
+                |      #{__('label.save')}

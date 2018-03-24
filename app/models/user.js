@@ -5,7 +5,8 @@ const saltRounds = 10;
 
 let UserSchema = new Schema({
     userName: {type: String, required: true, unique: true},
-    password: {type: String, required: true}
+    password: {type: String, required: true},
+    name: {type: String, required: true}
 });
 
 // MODIFICAR CONTRASENA

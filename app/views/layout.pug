@@ -52,7 +52,6 @@ html
                                             a.btn.btn-default.btn-flat(href='/account') #{__('label.account')}
                                         div.pull-right
                                             a.btn.btn-default.btn-flat(href='/logout') #{__('label.sign.out')}
-
             aside.main-sidebar
                 section.sidebar
                     
@@ -64,11 +63,11 @@ html
                         li#clients
                             a(href='/clients/')
                                 i.fa.fa-building-o
-                                span  #{__('label.clients')}
+                                span  #{__('label.students')}
                         li#users
                             a(href='/users/')
                                 i.fa.fa-user-o
-                                span  #{__('label.layout.users')}
+                                span  #{__('label.repords')}
             div.content-wrapper
                 section.content
                     div.row
@@ -80,7 +79,7 @@ html
                     b #{__('layout.label.version')} &nbsp;
                     span= version
                 strong
-                    | #{__('layout.footer')}
+                    | #{__('layout.footer')} &nbsp;
                 span
                     | #{__('layout.footer.rights')}
 

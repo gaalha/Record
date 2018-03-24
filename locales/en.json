@@ -8,5 +8,13 @@
     "label.users": "Usuarios",
     "label.repords": "Reportes",
     "label.record": "JMA-Records",
-    "label.navigation": "Navigation"
+    "label.navigation": "Navigation",
+    "label.dashboard": "Dashboard",
+    "layout.label.version": "Version:",
+    "layout.footer": "Mejía's",
+    "layout.footer.rights": "Todos los derechos reservados.",
+    "label.user.name": "Name",
+    "label.user.userName": "User",
+    "label.actions": "Actions",
+    "label.new": "Add"
 }
