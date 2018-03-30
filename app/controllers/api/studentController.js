@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../../models/user');
+const Student = require('../../models/student');
 
-router.post('/save', (req, res, next) => {
-    req.checkBody('txtUsername').trim().notEmpty();
-    req.checkBody('txtPassword').trim().notEmpty();
+router.post('/save-student', (req, res, next) => {
     req.checkBody('txtName').trim().notEmpty();
+    req.checkBody('txtLastName').trim().notEmpty();
 
     let errors = req.validationErrors();
     if(errors) {
@@ -77,7 +76,7 @@ router.post('/save', (req, res, next) => {
         }
     }
 });
-
+/*
 router.delete('/delete/:id', (req, res, next) => {
     let id = req.params.id;
 
@@ -125,5 +124,5 @@ router.get('/user-detail/:id', (req, res, next) => {
         });
     });
 });
-
+*/
 module.exports = router;

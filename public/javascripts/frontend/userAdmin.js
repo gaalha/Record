@@ -78,22 +78,23 @@ function showDialog(_id){
     });   
     startValidation();
 
-    /*if(isEditing){
+    if(isEditing){
         $("#txtIdHidden").val(_id);
         loadData(_id);
-    }*/
+    }
 }
 
-/*
+
 function loadData(_id){
     var form = $("#userForm");
     var name= $('#txtName');
     var userName= $('#txtUsername');
     var password= $('#txtPassword');
     $.ajax({
-        url: CONSTANTS.routes.user.getDetail.replace(':id', _id),
+        url: '/api/user/user-detail/' + _id,
         type:'GET',
         success:(data) => {
+            console.log(data);
             if(data.success == true){
                 name.val(data.data.name);
                 userName.val(data.data.userName);
@@ -101,7 +102,6 @@ function loadData(_id){
             }
         }});
 }
-*/
 
 function startValidation(){
     $('#userForm').validate({
